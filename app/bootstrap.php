@@ -15,7 +15,7 @@ $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
 $app = new \Slim\Slim(array(
-    'templates.path' => '../templates',
+    'templates.path' => __DIR__.'/../templates',
 ));
 
 $app->add(new \Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware);
@@ -50,10 +50,12 @@ $app->post('/result', function () use ($app) {
     }
     
     $allResults = require __DIR__.'/../tmp/results.php';
-
-    $results = array_filter($allResults, function ($item) {
-        return $item['student_code'] !== $studentCode;
+    
+    $results = array_filter($allResults, function ($item) use ($studentCode) {
+        return $item['student_code'] === $studentCode;
     });
+    
+    sleep(1);
 
     $app->render('result.twig', compact('results'));
 });

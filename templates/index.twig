@@ -6,13 +6,13 @@
             <h1>Výsledková listina prijímacích skúšok na SPŠE v Prešove</h1>
         </div>
 
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-4 col-md-offset-4">
             <form role="form" id="result-form">
                 <div class="form-group">
                     <label for="student-code">Kód žiaka</label>
                     <input type="input" name="student_code" class="form-control" id="student-code" placeholder="ELE051" value="ELE051">
                 </div>
-                <input type="submit" class="btn btn-default btn-block" value="Zobraziť výsledok">
+                <a href="#" id="result-form-submit" class="btn btn-primary ladda-button" data-style="expand-right" data-size="l"><span class="ladda-label">Zobraziť výsledok</span></a>
             </form>
         </div>
     </div>
@@ -27,17 +27,27 @@
         $(function () {
             var studentForm = $('#result-form'),
                 studentCodeInput = $('#student-code', studentForm),
-                resultContainer = $('#result');
+                resultContainer = $('#result'),
+                studentFormSubmit = $('#result-form-submit');
             
             studentForm.on('submit', function (e) {
                 e.preventDefault();
                 
+                var l = Ladda.create(studentFormSubmit[0]);
+                l.start();
+                
                 $.post('/public/index.php/result', studentForm.serialize())
                   .done(function (content) {
                     resultContainer.html(content);
-                  }, 'html');
+                  }, 'html')
+                  .always(function() { l.stop(); });
                 
                 return false;
+            });
+            
+            studentFormSubmit.on('click', function (e) {
+                e.preventDefault();
+                studentForm.trigger('submit');
             });
             
         });

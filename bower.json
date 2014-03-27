@@ -1,0 +1,19 @@
+{
+  "name": "spse-po-prijimacky",
+  "version": "0.0.0",
+  "authors": [
+    "Ján Mochňak <janmochnak@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ladda-bootstrap": "~0.1.0"
+  }
+}

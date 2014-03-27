@@ -4,12 +4,17 @@
 
 #}
 <div class="col-xs-12">
+    
+    <h2>Výsledky</h2>
+    
     {% for r in results %}
         <div class="row">
             <div class="col-xs-12">
-                {{ r.meno|capitalize }} {{ r.priezvisko[:1]|upper }}.
+                {{ r.meno|capitalize }} {{ r.priezvisko[:1]|upper }}. '{{ r.datum_narodenia|date('y') }}
                 {{ r.result }}
             </div>
         </div>
+    {% else %}
+        <div class="alert alert-danger">Prepáčte, ale nepodarilo sa nám nájsť výsledok podľa <strong>zadaného kódu žiada</strong>. Uistite sa, že ste kód zadali správne vo tvare ELE000.</div>
     {% endfor %}
 </div>
