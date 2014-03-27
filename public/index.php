@@ -1,9 +1,9 @@
 <?php
 
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Just include app/bootstrap.php here.
+ * If you are on production server, please define IS_PRODUCTION global constant to whatever you want.
+ * This file should be not overwritten by every deployment, just set it up once and then ignore it.
  */
 
 require __DIR__.'/../app/bootstrap.php';

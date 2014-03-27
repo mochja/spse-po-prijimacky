@@ -10,15 +10,20 @@ date_default_timezone_set('Europe/Bratislava');
 define('APP_DIR', __DIR__);
 require __DIR__.'/../vendor/autoload.php';
 
-$whoops = new \Whoops\Run;
-$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-$whoops->register();
+// Basicaly define this in production in index.php file..
+if ( defined('IS_PRODUCTION') === FALSE ) {
+    $whoops = new \Whoops\Run;
+    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+    $whoops->register();
+}
 
 $app = new \Slim\Slim(array(
     'templates.path' => __DIR__.'/../templates',
 ));
 
-$app->add(new \Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware);
+if ( defined('IS_PRODUCTION') === FALSE ) {
+    $app->add(new \Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware);
+}
 
 $app->container->singleton('log', function () {
     $log = new \Monolog\Logger('spse-po-prijimacky');
