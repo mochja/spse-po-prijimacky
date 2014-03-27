@@ -1,0 +1,45 @@
+{% extends '_layout.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="page-header">
+            <h1>Výsledková listina prijímacích skúšok na SPŠE v Prešove</h1>
+        </div>
+
+        <div class="col-xs-12 col-md-4">
+            <form role="form" id="result-form">
+                <div class="form-group">
+                    <label for="student-code">Kód žiaka</label>
+                    <input type="input" name="student_code" class="form-control" id="student-code" placeholder="ELE051" value="ELE051">
+                </div>
+                <input type="submit" class="btn btn-default btn-block" value="Zobraziť výsledok">
+            </form>
+        </div>
+    </div>
+    
+    <div class="row" style="margin-top: 22px">
+        <div id="result"></div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(function () {
+            var studentForm = $('#result-form'),
+                studentCodeInput = $('#student-code', studentForm),
+                resultContainer = $('#result');
+            
+            studentForm.on('submit', function (e) {
+                e.preventDefault();
+                
+                $.post('/public/index.php/result', studentForm.serialize())
+                  .done(function (content) {
+                    resultContainer.html(content);
+                  }, 'html');
+                
+                return false;
+            });
+            
+        });
+    </script>
+{% endblock %}

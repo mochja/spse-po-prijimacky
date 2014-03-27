@@ -1,0 +1,15 @@
+{#
+
+
+
+#}
+<div class="col-xs-12">
+    {% for r in results %}
+        <div class="row">
+            <div class="col-xs-12">
+                {{ r.meno|capitalize }} {{ r.priezvisko[:1]|upper }}.
+                {{ r.result }}
+            </div>
+        </div>
+    {% endfor %}
+</div>

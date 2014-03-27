@@ -1,0 +1,21 @@
+{
+    "name": "mochja/spse-po-prijimacky",
+    "require": {        
+        "php": ">=5.3.0",
+        "slim/slim": "2.*",
+        "monolog/monolog": "1.*",
+        "slim/views": "0.*",
+        "twig/twig": "1.*"
+    },
+    "require-dev": {
+        "filp/whoops": "dev-master",
+        "zeuxisoo/slim-whoops": "dev-master"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ján Mochňak",
+            "email": "janmochnak@gmail.com"
+        }
+    ]
+}
