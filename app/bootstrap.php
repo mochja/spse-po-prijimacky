@@ -55,8 +55,6 @@ $app->post('/result', function () use ($app) {
         return $item['student_code'] === $studentCode;
     });
     
-    sleep(1);
-
     $app->render('result.twig', compact('results'));
 });
 
