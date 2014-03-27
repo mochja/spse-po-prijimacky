@@ -7,11 +7,15 @@
 
 date_default_timezone_set('Europe/Bratislava');
 
+$config = array_merge( require(__DIR__.'/config.php'), require(__DIR__.'/config.local.php') );
+
 define('APP_DIR', __DIR__);
+define('IS_PRODUCTION', isset($config['development']) && $config['development'] !== TRUE);
+
 require __DIR__.'/../vendor/autoload.php';
 
 // Basicaly define this in production in index.php file..
-if ( defined('IS_PRODUCTION') === FALSE ) {
+if ( IS_PRODUCTION === FALSE ) {
     $whoops = new \Whoops\Run;
     $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
     $whoops->register();
@@ -21,7 +25,7 @@ $app = new \Slim\Slim(array(
     'templates.path' => __DIR__.'/../templates',
 ));
 
-if ( defined('IS_PRODUCTION') === FALSE ) {
+if ( IS_PRODUCTION === FALSE ) {
     $app->add(new \Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware);
 }
 

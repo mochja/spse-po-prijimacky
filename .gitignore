@@ -2,3 +2,5 @@
 /bower_components
 /vendor
 nbproject/private/private.properties
+
+app/config.local.php
